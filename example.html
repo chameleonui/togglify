@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dropzone test</title>
+	<style>
+		html { font-size: 10px; line-height: 16px; }
+		body { padding: 2em; font-size: 1.6rem; line-height: 1.5; }
+
+		.nav {
+			display: block;
+			position: relative;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		.nav > li {
+			position: relative;
+			display: inline;
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+		}
+		.nav > li > a {
+			display: inline-block;
+			margin: 0;
+			padding: 0 .5em;
+			line-height: 3;
+			border: 1px solid rgba(0,0,0,.4);
+		}
+
+		.nav > li .nav-dropdown {
+			display: none;
+		}
+		.nav > li.is-open .nav-dropdown {
+			display: block;
+		}
+		.nav-dropdown {
+			position: absolute;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			width: 200px;
+			z-index: 1000;
+		}
+		.nav-dropdown > li {
+			position: relative;
+		}
+		.nav-dropdown > li > a {
+			display: block;
+			background: silver;
+			line-height: 2;
+		}
+
+		.showcode {
+			margin: 24px 0 0 0;
+			display: block;
+		}
+		.showcode .showcode-content {
+			display: none;
+		}
+		.showcode.is-open .showcode-content {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+
+	<ul class="nav">
+		<li><a href="#">menu item</a></li>
+		<li>
+			<a href="#" data-dropdown>menu item</a>
+			<ul class="nav-dropdown">
+				<li><a href="#">submenu item</a></li>
+				<li><a href="#">submenu item</a></li>
+				<li><a href="#">submenu item</a></li>
+				<li><a href="#">submenu item</a></li>
+			</ul>
+		</li>
+		<li class="spesl">
+			<span>
+				<a href="#" data-dropdown data-target="li.spesl">menu item</a>
+			</span>
+			<ul class="nav-dropdown">
+				<li><a href="#">submenu item</a></li>
+				<li><a href="#">submenu item</a></li>
+				<li><a href="#">submenu item</a></li>
+				<li><a href="#">submenu item</a></li>
+			</ul>
+		</li>
+		<li><a href="#">menu item</a></li>
+	</ul>
+
+	<div class="showcode">
+		<span>
+			<a href="#" data-showcode data-target="div.showcode">ukaz zdrojáky</a>
+		</span>
+		<pre class="showcode-content">zdrojáky</pre>
+	</div>
+
+	<div class="showcode">
+		<span>
+			<a href="#" data-showcode data-target="div.showcode">ukaz zdrojáky</a>
+		</span>
+		<pre class="showcode-content">zdrojáky</pre>
+	</div>
+
+	<div class="showcode">
+		<span>
+			<a href="#" data-showcode data-target="div.showcode">ukaz zdrojáky</a>
+		</span>
+		<pre class="showcode-content">zdrojáky</pre>
+	</div>
+
+	<strong>ToDo</strong>
+	<ul>
+		<li><strike>close opened dropdown if i want to open another one</strike></li>
+		<li>close opened dropdown if click somewhere else in the body</li>
+	</ul>
+
+	
+	<script src="build/build.js"></script>
+	<script>
+		var $ = require('jquery');
+    	var Togglify = require('togglify');
+		
+		var dropdown = new Togglify('[data-dropdown]', {toggleClass: 'is-open'});
+		dropdown.onClickToggleAll();
+		dropdown.offClickCloseAll();
+
+		var showcode = new Togglify('[data-showcode]');
+		showcode.onClickToggle();
+
+
+		var region = new Togglify('[data-region]', {toggleClass: 'is-addnew'});
+		$('body').on('click', '[data-regionadd-toggle]', function(){
+			e.preventDefault();
+			region.toggle($(this));
+		});
+
+	</script>
+</body>
+</html>

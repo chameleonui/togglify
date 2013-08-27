@@ -9,6 +9,7 @@ var defaults = {
 };
 
 function Togglify(Element, options){
+	if (!Element) throw new TypeError('togglify(): expects an element');
 	this.options = options || {};
 	for (var i in defaults) {
 		if (!(this.options[i])) this.options[i] = defaults[i];
@@ -79,24 +80,25 @@ Togglify.prototype.closeAll = function() {
 
 Togglify.prototype.onClickToggle = function() {
 	var _this = this;
-	this._$element.on(this.options.clickEvent, function(e){
+	$('body').on(this.options.clickEvent, this._element, this, function(e){
 		e.stopPropagation();
 		e.preventDefault();
-		_this.toggle($(this));
+		e.data.toggle($(this));
+		e.data.emit('onClickToggle');
 	});
 
-	this.emit('onClickToggle');
+	return this;
 };
 
 Togglify.prototype.onClickToggleAll = function() {
 	var _this = this;
-	this._$element.on(this.options.clickEvent, function(e){
+	$('body').on(this.options.clickEvent, this._element, this, function(e){
 		e.stopPropagation();
 		e.preventDefault();
-		_this.toggleAll($(this));
+		e.data.toggleAll($(this));
+		e.data.emit('onClickToggle');
 	});
 
-	this.emit('onClickToggle');
 	return this;
 };
 
@@ -105,9 +107,9 @@ Togglify.prototype.offClickCloseAll = function() {
 	$('html').on(this.options.clickEvent, function(e){
 		e.stopPropagation();
 		_this.closeAll();
+		_this.emit('offClickCloseAll');
 	});
 
-	this.emit('offClickCloseAll');
 	return this;
 };
 

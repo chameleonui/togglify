@@ -1,4 +1,3 @@
-
 # Togglify
 
   Simple dropdown menu

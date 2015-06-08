@@ -2,7 +2,7 @@
   "name": "togglify",
   "repo": "chameleonui/togglify",
   "description": "Simple dropdown menu",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "keywords": [],
   "dependencies": {
     "components/jquery": "1.11",

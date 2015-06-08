@@ -18,7 +18,7 @@ function Togglify(Element, options){
 	this._element = Element;
 	this._$element = $(this._element);
 	this._dataTarget = null;
-	
+
 	return this;
 }
 
@@ -104,7 +104,7 @@ Togglify.prototype.onClickToggleAll = function() {
 
 Togglify.prototype.offClickCloseAll = function() {
 	var _this = this;
-	$('html').on(this.options.clickEvent, function(e){
+	$(document).on(this.options.clickEvent, function(e){
 		e.stopPropagation();
 		_this.closeAll();
 		_this.emit('offClickCloseAll');

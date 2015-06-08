@@ -1,3 +1,9 @@
+# 0.1
+
+## 0.1.0
+
+* Bind closing events to document instead of html
+
 # 0.0
 
 ## 0.0.3

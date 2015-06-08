@@ -4,8 +4,23 @@
 	<meta charset="UTF-8">
 	<title>Dropzone test</title>
 	<style>
-		html { font-size: 10px; line-height: 16px; }
-		body { padding: 2em; font-size: 1.6em; line-height: 1.5; }
+		html {
+			font-size: 16px;
+			line-height: 1.5;
+			font-family: "Open Sans", sans-serif;
+			height: 100%;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		*, *:before, *:after {
+			box-sizing: inherit;
+		}
+		body {
+			padding: 2em;
+			font-size: 100%;
+			min-height: 100%;
+		}
 
 		.nav {
 			display: block;
@@ -27,12 +42,13 @@
 			padding: 0 .5em;
 			line-height: 3;
 			border: 1px solid rgba(0,0,0,.4);
+			border-radius: 5px;
 		}
 
-		.nav > li .nav-dropdown {
+		.nav > li > .nav-dropdown {
 			display: none;
 		}
-		.nav > li.is-open .nav-dropdown {
+		.nav > li.is-open > .nav-dropdown {
 			display: block;
 		}
 		.nav-dropdown {
@@ -42,14 +58,28 @@
 			padding: 0;
 			width: 200px;
 			z-index: 1000;
+			border-radius: 5px;
+			background-color: #f5f5f5;
+			left: 0;
 		}
 		.nav-dropdown > li {
 			position: relative;
 		}
 		.nav-dropdown > li > a {
 			display: block;
-			background: silver;
-			line-height: 2;
+			padding: 0.5em;
+		}
+
+		.nav-dropdown > li:first-of-type > a {
+			border-radius: 5px 5px 0 0;
+		}
+
+		.nav-dropdown > li:last-of-type > a {
+			border-radius: 0 0 5px 5px;
+		}
+
+		.nav-dropdown > li > a:hover {
+			background-color: rgba(0,0,0,.1);
 		}
 
 		.showcode {
@@ -67,10 +97,11 @@
 <body>
 
 	<ul class="nav">
-		<li><a href="#">menu item</a></li>
+		<li><a href="#">menu item 01</a></li>
 		<li>
-			<a href="#" data-dropdown>menu item</a>
+			<a href="#" data-dropdown>menu item 02</a>
 			<ul class="nav-dropdown">
+				<li><strong>Item 02 submenu</strong></li>
 				<li><a href="#">submenu item</a></li>
 				<li><a href="#">submenu item</a></li>
 				<li><a href="#">submenu item</a></li>
@@ -79,16 +110,17 @@
 		</li>
 		<li class="spesl">
 			<span>
-				<a href="#" data-dropdown data-target="li.spesl">menu item</a>
+				<a href="#" data-dropdown data-target="li.spesl">menu item 03</a>
 			</span>
 			<ul class="nav-dropdown">
+				<li><strong>Item 03 submenu</strong></li>
 				<li><a href="#">submenu item</a></li>
 				<li><a href="#">submenu item</a></li>
 				<li><a href="#">submenu item</a></li>
 				<li><a href="#">submenu item</a></li>
 			</ul>
 		</li>
-		<li><a href="#">menu item</a></li>
+		<li><a href="#">menu item 04</a></li>
 	</ul>
 
 	<div class="showcode">
@@ -118,12 +150,12 @@
 		<li>close opened dropdown if click somewhere else in the body</li>
 	</ul>
 
-	
+
 	<script src="build/build.js"></script>
 	<script>
 		var $ = require('jquery');
     	var Togglify = require('togglify');
-		
+
 		var dropdown = new Togglify('[data-dropdown]', {toggleClass: 'is-open'});
 		dropdown.onClickToggleAll();
 		dropdown.offClickCloseAll();
